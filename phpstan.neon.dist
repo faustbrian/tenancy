@@ -1,0 +1,16 @@
+parameters:
+    level: max
+    paths:
+        - src
+    ignoreErrors:
+        -
+            identifier: trait.unused
+            path: src/Concerns/BelongsToTenant.php
+        -
+            identifier: trait.unused
+            path: src/Concerns/HasTenantId.php
+        -
+            identifier: trait.unused
+            path: src/Concerns/TenantAware.php
+
+    reportUnmatchedIgnoredErrors: true
