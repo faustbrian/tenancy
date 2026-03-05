@@ -9,6 +9,9 @@
 
 namespace Cline\Tenancy\Exceptions;
 
+use Facade\IgnitionContracts\BaseSolution;
+use Facade\IgnitionContracts\ProvidesSolution;
+use Facade\IgnitionContracts\Solution;
 use InvalidArgumentException;
 
 /**
@@ -27,4 +30,17 @@ use InvalidArgumentException;
  * @see InvalidTenancyTableNameException
  * @see InvalidTenancyTaskException
  */
-abstract class InvalidTenancyConfiguration extends InvalidArgumentException implements TenancyExceptionInterface {}
+abstract class InvalidTenancyConfiguration extends InvalidArgumentException implements ProvidesSolution, TenancyExceptionInterface
+{
+    public function getSolution(): Solution
+    {
+        /** @var BaseSolution $solution */
+        $solution = BaseSolution::create('Review package usage and configuration.');
+
+        return $solution
+            ->setSolutionDescription('Exception: '.$this->getMessage())
+            ->setDocumentationLinks([
+                'Package documentation' => 'https://github.com/cline/tenancy',
+            ]);
+    }
+}
